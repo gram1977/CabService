@@ -41,5 +41,10 @@
     "tab.inactiveBackground": "#013220",
     "breadcrumb.background": "#013220",
     "panel.background": "#013220"
-  }
+  },
+  "auto-run-command.commands": [
+    {
+      "command": "project-timer.openStatistics"
+    }
+  ]
 }
