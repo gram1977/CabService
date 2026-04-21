@@ -3,6 +3,7 @@ const Customer = require("../models/customer");
 // Create a new Customer
 exports.createCustomer = async (req, res) => {
   try {
+    console.log("Registering Customer:", req.body);
     const customer = await Customer.create(req.body);
     res.status(201).json(customer);
   } catch (err) {

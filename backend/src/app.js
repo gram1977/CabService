@@ -1,5 +1,13 @@
+/*  
+app.js: backend server entry point. It loads environment variables, connects to the database, 
+sets up the Express server, applies middleware, and mounts your admin and customer routes.
+*/
+
 // Load environment variables from .env file
-require("dotenv").config({ path: require('path').resolve(__dirname, '../../.env') });
+require("dotenv").config({
+  path: require("path").resolve(__dirname, "../.env"),
+});
+const cors = require("cors");
 
 // In backend/src/app.js, import and call connectDB at the top:
 const connectDB = require("./config/db");
@@ -11,6 +19,16 @@ const app = express();
 
 console.log("Loaded PORT:", process.env.PORT);
 const PORT = process.env.PORT;
+
+//Set up CORS
+app.use(cors());
+
+// CORS configuration: Allow requests from frontend (http://localhost:3001)
+app.use(
+  cors({
+    origin: "http://localhost:3001", // or the port your frontend runs on
+  }),
+);
 
 //Middleware: built-in middleware: Parse JSON bodies (as sent by API clients)
 app.use(express.json());
@@ -25,6 +43,9 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
   res.send("Cab Service API is running");
 });
+
+// Mount login routes
+app.use("/api/auth", require("./routes/auth"));
 
 /* 
 admin routes: you mount each admin router with app.use('/admin', ...). 
@@ -61,7 +82,24 @@ app.listen(PORT, () => {
   console.log("============HOME====================");
   console.log(`http://localhost:${PORT}`);
 
-console.log(`
+  console.log(`
+
+POST http://localhost:${PORT}/api/login/register --Create New User registration
+  body:
+  {
+  "email": "admin@example.com",
+  "password": "admin",
+  "role": "admin"
+  }
+
+POST http://localhost:${PORT}/api/login --Login user
+  body:
+  {
+    "email": "admin@example.com",
+    "password": "admin"
+  }
+    
+  
 POST http://localhost:${PORT}/customer/login --Create New Customer login
 	http://localhost:${PORT}/customer/login
 	{"message":"customer: login page user!"}

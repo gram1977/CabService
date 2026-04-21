@@ -1,3 +1,116 @@
+.Login {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  width: 320px;
+  margin: 0 auto;
+}
+
+.Register {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-form {
+  width: 320px;
+  margin: 0 auto;
+}
+
+/*  
+    .form-row is the parent container (a flex container).
+    .form-row label and .form-row input are child elements inside that parent container.
+     margin-bottom: 1.2rem adds space below each .form-row, separating it from the next row.
+*/
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.form-row label {
+  width: 100px;
+  margin-right: 1rem;
+  text-align: right;
+}
+
+/*  
+    flex: 1 in .form-row input tells the input to grow and fill all available horizontal space within its 
+    flex container (.form-row).
+    This allows the input to expand and take up the remaining space next to the label, 
+    creating a balanced layout where the label has a fixed width and the input adjusts to fill the rest of the row.
+*/
+.form-row input {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.Home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Sidebar {
+  width: 180px;
+  background: #8B8000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem 0;
+  min-height: 100vh;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.04);
+}
+
+.Sidebar a {
+  color: #fff !important;
+}
+
+.Sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.Sidebar li {
+  width: 100%;
+}
+
+.Sidebar button {
+  width: 100%;
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+
+/*  
+    background: #344055; is a darker shade of the sidebar's background color (#222c36).
+    This style is applied to buttons that are either active (the current page) or being hovered over.
+*/
+.Sidebar button.active,
+.Sidebar button:hover {
+  background: #344055;
+}
+
 .App {
   text-align: center;
 }
