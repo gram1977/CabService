@@ -17,6 +17,6 @@ applications:
       cache:
         paths:
           - frontend/node_modules/**/*
-  env:
-    variables:
-      REACT_APP_API_URL: http://your-ec2-public-ip:PORT
+      env:
+        variables:
+          REACT_APP_API_URL: https://your-backend-url.com
