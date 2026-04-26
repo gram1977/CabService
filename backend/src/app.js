@@ -26,7 +26,10 @@ app.use(cors());
 // CORS configuration: Allow requests from frontend (http://localhost:3001)
 app.use(
   cors({
-    origin: "http://localhost:3001", // or the port your frontend runs on
+    origin: [
+      "http://localhost:3001", // or the port your frontend runs on
+      "https://main.d1ce1f8g8j1xi9.amplifyapp.com", //for AWS Amplify deployment
+    ], 
   }),
 );
 
@@ -65,13 +68,17 @@ app.use("/customer", require("./routes/customer/profile"));
 
 /*  
 Middleware: custom middleware: Error handling middleware: catch-all 404 handler
-Ensures frontend recieve "Page not found" message instead of a generic or confusing error
+Returns JSON for API requests, HTML for others
 */
 app.use((req, res) => {
-  res.status(404).send(`
-    <h1>'Page not found'</h1>
-    <p> 'The page you are looking for does not exist.'</p>;
-`);
+  if (req.path.startsWith('/api/')) {
+    res.status(404).json({ message: 'API route not found' });
+  } else {
+    res.status(404).send(`
+      <h1>Page not found</h1>
+      <p>The page you are looking for does not exist.</p>
+    `);
+  }
 });
 
 // Start the server

@@ -12,8 +12,8 @@ function Register() {
     e.preventDefault();
     try {
       console.log("Registering with:", { email, password, role });
-      const API_PORT = process.env.REACT_APP_API_PORT || 3001;
-      const response = await fetch(`http://localhost:${API_PORT}/api/auth/register`, {
+      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
