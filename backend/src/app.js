@@ -9,13 +9,13 @@ require("dotenv").config({
 });
 const cors = require("cors");
 
-// In backend/src/app.js, import and call connectDB at the top:
-const connectDB = require("./config/db");
-connectDB();
-
 // Set up Express server
 const express = require("express");
 const app = express();
+
+// In backend/src/app.js, import and call connectDB at the top:
+const connectDB = require("./config/db");
+connectDB();
 
 console.log("Loaded PORT:", process.env.PORT);
 const PORT = process.env.PORT;
