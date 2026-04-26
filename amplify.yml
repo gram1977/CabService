@@ -1,6 +1,7 @@
 version: 1
 applications:
-  - frontend:
+  - appRoot: frontend
+    frontend:
       phases:
         preBuild:
           commands:
@@ -15,7 +16,6 @@ applications:
       cache:
         paths:
           - .npm/**/*
-      appRoot: frontend
       env:
         variables:
           REACT_APP_API_URL: https://your-backend-url.com
