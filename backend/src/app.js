@@ -20,16 +20,17 @@ connectDB();
 console.log("Loaded PORT:", process.env.PORT);
 const PORT = process.env.PORT;
 
-//Set up CORS
-app.use(cors());
-
-// CORS configuration: Allow requests from frontend (http://localhost:3001)
+// CORS configuration
 app.use(
   cors({
     origin: [
-      "http://localhost:3001", // or the port your frontend runs on
-      "https://main.d1ce1f8g8j1xi9.amplifyapp.com", //for AWS Amplify deployment
-    ], 
+      "http://localhost:3001",
+      "http://localhost:3000",
+      "https://main.d3nw8a4cp1tk3t.amplifyapp.com",
+      "https://grewalcabs.in",
+      "https://api.grewalcabs.in",
+    ],
+    credentials: true,
   }),
 );
 
