@@ -230,10 +230,39 @@ You can use these demo accounts or register your own.
 - [AWS Amplify Docs](https://docs.aws.amazon.com/amplify/)
 - [AWS Elastic Beanstalk Docs](https://docs.aws.amazon.com/elasticbeanstalk/)
 
+
+
+## 🌐 Custom Domain with AWS Route 53 & HTTPS Request Flow
+
+### Custom Domain Setup (Route 53)
+- Register or manage your custom domain (e.g., `api.example.com`) in AWS Route 53.
+- Create the necessary DNS records in Route 53 to point your domain to your AWS Amplify app (for frontend) and Elastic Beanstalk environment (for backend).
+
+### HTTPS End-to-End Flow
+
+#### Frontend (Amplify + Route 53 + ACM)
+- Your React app is hosted on AWS Amplify.
+- Amplify automatically provisions an SSL certificate via AWS Certificate Manager (ACM).
+- All requests from the frontend are sent over HTTPS.
+
+#### DNS Routing (Route 53)
+- Your custom domain (e.g., `grewalcabs.in`) is managed in Route 53.
+- Route 53 routes traffic to your backend’s Elastic Load Balancer (ELB) in Elastic Beanstalk.
+
+#### Backend (Elastic Beanstalk + ACM)
+- Elastic Beanstalk environments with a load balancer can attach an ACM certificate.
+- The ELB terminates HTTPS:
+  - Receives the HTTPS request.
+  - Decrypts it using the ACM certificate.
+  - Forwards the request to your Node.js app (usually over HTTP inside the VPC).
+  - Your Node.js app processes the request and sends back a response.
+  - The ELB re-encrypts the response and sends it back to the client over HTTPS.
+
+This setup ensures secure, end-to-end encrypted communication between your users and your application, using AWS best practices for custom domains and SSL/TLS.
+
 This project is licensed under the terms specified in the repository.
 
----
-*Built with ❤️ for the CabService community.*
+
 
 The CabService project follows a classic Full-Stack MERN-style architecture (MongoDB, Express, React, Node.js), structured  as a decoupled Monorepo.
 
@@ -274,3 +303,6 @@ The CabService project follows a classic Full-Stack MERN-style architecture (Mon
 ## 📊 Visual Folder Structure
 
 A detailed, interactive folder structure is available as a Mermaid chart in [CabService_Folder_Structure.mmd](CabService_Folder_Structure.mmd). You can preview this chart directly in VS Code using a Mermaid extension for a visual overview of the project layout.
+
+---
+*Built with ❤️ for the CabService community.*
