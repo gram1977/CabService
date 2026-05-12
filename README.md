@@ -14,26 +14,63 @@ CabService/
 │   ├── src/
 │   │   ├── config/         # Database configuration (MongoDB)
 │   │   ├── controllers/    # Request handlers for various entities
-│   │   ├── models/         # Mongoose schemas/models
-│   │   ├── routes/         # API Route definitions
-│   │   │   ├── admin/      # Admin-facing endpoints
-│   │   │   └── customer/   # Customer-facing endpoints
+│   │   │   ├── cabtrip.js
+│   │   │   ├── customer.js
+│   │   │   ├── enquiry.js
+│   │   │   ├── login.js
+│   │   │   ├── order.js
+│   │   │   ├── quotes.js
+│   │   │   └── service.js
 │   │   ├── middleware/     # Authentication & validation middleware
+│   │   ├── models/         # Mongoose schemas/models
+│   │   │   ├── cabtrip.js
+│   │   │   ├── customer.js
+│   │   │   ├── enquiry.js
+│   │   │   ├── login.js
+│   │   │   ├── order.js
+│   │   │   ├── quotes.js
+│   │   │   └── service.js
+│   │   ├── routes/         # API Route definitions
+│   │   │   ├── admin/      # Admin-facing endpoints (bookings, enquiries, quotes, services)
+│   │   │   │   ├── bookings.js
+│   │   │   │   ├── enquiries.js
+│   │   │   │   ├── quotes.js
+│   │   │   │   └── services.js
+│   │   │   └── customer/   # Customer-facing endpoints (auth, orders, profile, services)
+│   │   │       ├── auth.js
+│   │   │       ├── orders.js
+│   │   │       ├── profile.js
+│   │   │       └── services.js
 │   │   ├── services/       # Business logic layer
 │   │   ├── utils/          # Utility functions
 │   │   └── app.js          # Express application entry point
 │   ├── tests/              # Backend test suites
-│   └── package.json        # Backend dependencies & scripts
+│   ├── .env                # Backend environment variables
+│   ├── package.json        # Backend dependencies & scripts
+│   └── Procfile            # For deployment into AWS (e.g., Heroku, AWS)
 ├── frontend/               # React Frontend
 │   ├── public/             # Static assets
-│   ├── src/                # React source code
-│   │   ├── components/     # UI Components
-│   │   ├── pages/          # Page components (Home, Login, Register, etc.)
+│   ├── src/                # React source code (components in root)
+│   │   ├── AdminBookings.js
+│   │   ├── AdminEnquiries.js
+│   │   ├── AdminQuotes.js
+│   │   ├── AdminServices.js
+│   │   ├── CustAuth.js
+│   │   ├── CustOrders.js
+│   │   ├── CustProfile.js
+│   │   ├── CustServices.js
+│   │   ├── Home.js
+│   │   ├── Login.js
+│   │   ├── Register.js
 │   │   ├── App.js          # Root React component
 │   │   └── index.js        # Frontend entry point
-│   └── package.json        # Frontend dependencies & scripts
+│   ├── build/              # Production build output
+│   ├── .env                # Frontend environment variables
+│   ├── package.json        # Frontend dependencies & scripts
+│   └── README.md           # Frontend documentation
 ├── docs/                   # Documentation and build artifacts
 ├── scripts/                # Utility scripts
+├── amplify.yml             # Amplify deployment config
 ├── CHANGELOG.md            # Version history
 ├── README.md               # Project documentation
 ├── SECURITY.md             # Security policy
@@ -74,15 +111,25 @@ CabService/
    ```
    - Create a `.env` file in the `backend/` directory and add your MongoDB URI and PORT:
      ```env
-     PORT=5000
-     MONGODB_URI=your_mongodb_connection_string
+     MONGODB_URI=your_mongodb_connection_string from mongodb atlas
+     MONGODB_DB=cabservice
+     PORT=3000     
      ```
 
+
 3. **Frontend Setup:**
-   ```bash
-   cd ../frontend
-   npm install
-   ```
+  ```bash
+  cd ../frontend
+  npm install
+  ```
+  - Create a `.env` file in the `frontend/` directory if you need to set environment variables (e.g., REACT_APP_API_URL):
+    ```env
+    REACT_APP_API_URL=https://api.grewalcabs.in
+    Frontend API call to backend node server.
+    This URL is from a custom domain created in AWS.
+
+    To run application hosted on AWS run on your browser: https://grewalcabs.in/
+    ```
 
 ### Running the Application
 
@@ -100,18 +147,74 @@ CabService/
 
 ## 📋 Features
 
-- **Customer Module:**
-  - Secure Registration & Login
-  - Service Discovery
-  - Booking Management
-  - Profile Management
-- **Admin Module:**
-  - Booking Oversight
-  - Enquiry Management
-  - Quote Generation
-  - Service Management
+**Customer Module:**
+- Registration & Login (Note: For production, password hashing with bcrypt is recommended for security)
+- Order Management (create, view, and manage orders)
+- Service Discovery (view available cab services)
+- Booking Management (create, view, and manage bookings)
+- Profile Management (view and update profile)
 
-## 📄 License
+**Admin Module:**
+- Booking Oversight (view and manage all bookings)
+- Enquiry Management (handle customer enquiries)
+- Quote Generation (create and manage service quotes)
+- Service Management (add, update, and remove services)
+
+**General Features:**
+- Role-Based Access Control (RBAC) for Admin and Customer
+- RESTful API design
+- Decoupled frontend and backend for independent deployment
+- Environment-based configuration
+- Layered backend architecture (config, routes, controllers, models, services, utils)
+- Modern React SPA with Context API for state management
+
+
+## ☁️ AWS Deployment
+
+### Frontend: Deploy with AWS Amplify
+
+1. **Connect your repository to AWS Amplify:**
+  - Go to the [AWS Amplify Console](https://console.aws.amazon.com/amplify/).
+  - Click "Get Started" under "Deploy" and connect your GitHub repository.
+  - Select the `frontend/` folder as the root for the build.
+
+2. **Configure build settings:**
+  - Amplify will auto-detect React and create a build pipeline.
+  - If needed, customize the `amplify.yml` file in the project root for build steps.
+
+3. **Set environment variables:**
+  - In the Amplify Console, go to App settings > Environment variables.
+  - Add variables such as `REACT_APP_API_URL` to point to your backend API.
+
+4. **Deploy:**
+  - Amplify will build and deploy your frontend automatically on each push to the connected branch.
+
+### Backend: Deploy with AWS Elastic Beanstalk
+
+
+1. **Prepare your backend for deployment:**
+  - Copy all files and folders from the `backend/` directory (including `src/`, `package.json`, `.env`, `Procfile`, etc.) into a new folder for packaging.
+  - Remove any local files or folders not needed in production (such as `tests/` if not required).
+
+2. **Create a ZIP archive:**
+  - Select all contents of your prepared backend folder and compress them into a single ZIP file (do not zip the folder itself, only its contents).
+
+3. **Upload to AWS Elastic Beanstalk:**
+  - Go to the [AWS Elastic Beanstalk Console](https://console.aws.amazon.com/elasticbeanstalk/).
+  - Create a new application (Platform: Node.js).
+  - Create a new environment (Web server environment).
+  - Upload your ZIP file when prompted for the application code.
+
+4. **Set environment variables:**
+  - In the AWS Console, go to Elastic Beanstalk > your environment > Configuration > Software.
+  - Add environment variables such as `MONGODB_URI` and `PORT`.
+
+5. **Update API URL in frontend:**
+  - Set `REACT_APP_API_URL` in Amplify to the Elastic Beanstalk backend endpoint.
+
+**References:**
+- [AWS Amplify Docs](https://docs.aws.amazon.com/amplify/)
+- [AWS Elastic Beanstalk Docs](https://docs.aws.amazon.com/elasticbeanstalk/)
 
 This project is licensed under the terms specified in the repository.
 
