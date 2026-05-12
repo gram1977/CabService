@@ -145,6 +145,20 @@ CabService/
    npm start
    ```
 
+## 🔑 Login Credentials & User Creation
+
+On the login page, you can create a new user. New users can be either **admin** or **customer** type. After registration, log in with the credentials you created.
+
+**Demo Credentials:**
+- **Admin:**
+  - Username: `admin@example.com`
+  - Password: `admin`
+- **Customer:**
+  - Username: `aman@example.com`
+  - Password: `aman`
+
+You can use these demo accounts or register your own.
+
 ## 📋 Features
 
 **Customer Module:**
