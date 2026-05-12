@@ -247,7 +247,7 @@ You can use these demo accounts or register your own.
 
 #### DNS Routing (Route 53)
 - Your custom domain (e.g., `grewalcabs.in`) is managed in Route 53.
-- Route 53 routes traffic to your backend’s Elastic Load Balancer (ELB) in Elastic Beanstalk.
+- Route 53 routes traffic to your backend’22s Elastic Load Balancer (ELB) in Elastic Beanstalk.
 
 #### Backend (Elastic Beanstalk + ACM)
 - Elastic Beanstalk environments with a load balancer can attach an ACM certificate.
@@ -259,9 +259,6 @@ You can use these demo accounts or register your own.
   - The ELB re-encrypts the response and sends it back to the client over HTTPS.
 
 This setup ensures secure, end-to-end encrypted communication between your users and your application, using AWS best practices for custom domains and SSL/TLS.
-
-This project is licensed under the terms specified in the repository.
-
 
 
 The CabService project follows a classic Full-Stack MERN-style architecture (MongoDB, Express, React, Node.js), structured  as a decoupled Monorepo.
@@ -303,6 +300,8 @@ The CabService project follows a classic Full-Stack MERN-style architecture (Mon
 ## 📊 Visual Folder Structure
 
 A detailed, interactive folder structure is available as a Mermaid chart in [CabService_Folder_Structure.mmd](CabService_Folder_Structure.mmd). You can preview this chart directly in VS Code using a Mermaid extension for a visual overview of the project layout.
+
+This project is licensed under the terms specified in the repository.
 
 ---
 *Built with ❤️ for the CabService community.*
