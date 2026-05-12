@@ -1,0 +1,115 @@
+---
+title: CabService Folder Structure
+---
+flowchart TB
+    subgraph FRONTEND ["frontend"]
+        F1[.env]
+        F2[build/]
+        F3[node_modules/]
+        F4[package-lock.json]
+        F5[package.json]
+        F6[public/]
+        F7[README.md]
+        F8[src/]
+        F8a[AdminBookings.js]
+        F8b[AdminEnquiries.js]
+        F8c[AdminQuotes.js]
+        F8d[AdminServices.js]
+        F8e[App.css]
+        F8f[App.js]
+        F8g[App.test.js]
+        F8h[CustAuth.js]
+        F8i[CustOrders.js]
+        F8j[CustProfile.js]
+        F8k[CustServices.js]
+        F8l[Home.js]
+        F8m[index.css]
+        F8n[index.js]
+        F8o[Login.js]
+        F8p[logo.svg]
+        F8q[Register.js]
+        F8r[reportWebVitals.js]
+        F8s[setupTests.js]
+        F8 --> F8a
+        F8 --> F8b
+        F8 --> F8c
+        F8 --> F8d
+        F8 --> F8e
+        F8 --> F8f
+        F8 --> F8g
+        F8 --> F8h
+        F8 --> F8i
+        F8 --> F8j
+        F8 --> F8k
+        F8 --> F8l
+        F8 --> F8m
+        F8 --> F8n
+        F8 --> F8o
+        F8 --> F8p
+        F8 --> F8q
+        F8 --> F8r
+        F8 --> F8s
+    end
+    subgraph BACKEND ["backend"]
+        B1[.env]
+        B2[node_modules/]
+        B3[package-lock.json]
+        B4[package.json]
+        B5[Procfile]
+        B6[src/]
+        B6a[app.js]
+        B6b[config/]
+        B6b1[db.js]
+        B6c[controllers/]
+        B6c1[cabtrip.js]
+        B6c2[customer.js]
+        B6c3[enquiry.js]
+        B6c4[login.js]
+        B6c5[order.js]
+        B6c6[quotes.js]
+        B6c7[service.js]
+        B6d[middleware/]
+        B6e[models/]
+        B6e1[cabtrip.js]
+        B6e2[customer.js]
+        B6e3[enquiry.js]
+        B6e4[login.js]
+        B6e5[order.js]
+        B6e6[quotes.js]
+        B6e7[service.js]
+        B6f[routes/]
+        B6f1[admin/]
+        B6f1 --> B6f1a[bookings.js]
+        B6f1 --> B6f1b[enquiries.js]
+        B6f1 --> B6f1c[quotes.js]
+        B6f1 --> B6f1d[services.js]
+        B6f --> B6f2[auth.js]
+        B6f --> B6f3[customer/]
+        B6f3 --> B6f3a[auth.js]
+        B6f3 --> B6f3b[orders.js]
+        B6f3 --> B6f3c[profile.js]
+        B6f3 --> B6f3d[services.js]
+        B6 --> B6g[services/]
+        B6 --> B6h[utils/]
+        B6 --> B6a
+        B6 --> B6b
+        B6b --> B6b1
+        B6 --> B6c
+        B6c --> B6c1
+        B6c --> B6c2
+        B6c --> B6c3
+        B6c --> B6c4
+        B6c --> B6c5
+        B6c --> B6c6
+        B6c --> B6c7
+        B6 --> B6d
+        B6 --> B6e
+        B6e --> B6e1
+        B6e --> B6e2
+        B6e --> B6e3
+        B6e --> B6e4
+        B6e --> B6e5
+        B6e --> B6e6
+        B6e --> B6e7
+        B6 --> B6f
+    end

@@ -256,3 +256,7 @@ The CabService project follows a classic Full-Stack MERN-style architecture (Mon
      standard React patterns).
    * Decoupling: The frontend and backend are completely separate applications, allowing them to be scaled or deployed
      independently if needed.
+
+## 📊 Visual Folder Structure
+
+A detailed, interactive folder structure is available as a Mermaid chart in [CabService_Folder_Structure.mmd](CabService_Folder_Structure.mmd). You can preview this chart directly in VS Code using a Mermaid extension for a visual overview of the project layout.
